@@ -1,0 +1,6 @@
+-c --cpu Cortex-M3 -g -O0 --apcs=interwork --split_sections
+-IF:\github_repository\Microcomputer-Principle-and-System_experiment\µÚ7ÕÂ×÷Òµ\0710\RTE
+-I"D:\Program Files (x86)\MDK5.20\Keil\STM32F1xx_DFP\2.1.0\Device\Include"
+-I"D:\Program Files (x86)\MDK5.20\ARM\CMSIS\Include"
+-D__UVISION_VERSION="521" -DSTM32F10X_HD
+-o .\objects\hr0710.o --omf_browse .\objects\hr0710.crf --depend .\objects\hr0710.d "hr0710.c"

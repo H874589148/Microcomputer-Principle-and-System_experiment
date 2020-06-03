@@ -1,0 +1,32 @@
+Component: ARM Compiler 5.06 update 3 (build 300) Tool: armlink [4d35c9]
+
+==============================================================================
+
+Section Cross References
+
+    hr0709.o(RESET) refers to hr0709.o(STACK) for __initial_sp
+    hr0709.o(RESET) refers to hr0709.o(.text) for Reset_Handler
+
+
+==============================================================================
+
+Memory Map of the image
+
+  Image Entry point : 0x00000000
+
+  Load Region LR_IROM1 (Base: 0x08000000, Size: 0x0000040c, Max: 0x00080000, ABSOLUTE)
+
+    Execution Region ER_IROM1 (Base: 0x08000000, Size: 0x0000040c, Max: 0x00080000, ABSOLUTE)
+
+    Base Addr    Size         Type   Attr      Idx    E Section Name        Object
+
+    0x08000000   0x00000400   Data   RO            2    RESET               hr0709.o
+    0x08000400   0x0000000c   Code   RO            3  * .text               hr0709.o
+
+
+    Execution Region RW_IRAM1 (Base: 0x20000000, Size: 0x00000400, Max: 0x00010000, ABSOLUTE)
+
+    Base Addr    Size         Type   Attr      Idx    E Section Name        Object
+
+    0x20000000   0x00000400   Zero   RW            1    STACK               hr0709.o
+

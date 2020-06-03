@@ -1,0 +1,78 @@
+
+
+
+ARM Macro Assembler    Page 1 
+
+
+    1 00000000                 AREA             BUF, DATA, READWRITE 
+                                                            ;¶¨ÒåÊý¾Ý¶ÎBuf
+    2 00000000 11 22 33 
+              44       Array   DCB              0x11,0x22,0x33,0x44
+    3 00000004 55 66 77 
+              88               DCB              0x55,0x66,0x77,0x88
+    4 00000008 00 00 00 
+              00               DCB              0x00,0x00,0x00,0x00 ;¶¨Òå12¸ö×Ö
+                                                            ½ÚµÄÊý×éArray
+    5 0000000C                 AREA             RESET, CODE, READONLY
+    6 00000000                 ENTRY
+    7 00000000 4803            LDR              R0,=Array   ;È¡µÃÊý×éArrayµÄÊ×µ
+                                                            ØÖ·
+    8 00000002 6802            LDR              R2,[R0]
+    9 00000004 F04F 0101       MOV              R1,#1       ; R1=1
+   10 00000008 F850 3021       LDR              R3,[R0,R1,LSL#2]
+   11 0000000C E7FE    LOOP    B                LOOP
+   12 0000000E                 END
+              00 00 00000000 
+Command Line: --debug --xref --diag_suppress=9931 --cpu=Cortex-M3 --apcs=interw
+ork --depend=.\objects\hr07test.d -o.\objects\hr07test.o -IF:\github_repository
+\Microcomputer-Principle-and-System_experiment\µÚ7ÕÂ×÷Òµ\RTE -I"D:\Program File
+s (x86)\MDK5.20\Keil\STM32F1xx_DFP\2.1.0\Device\Include" -I"D:\Program Files (x
+86)\MDK5.20\ARM\CMSIS\Include" --predefine="__UVISION_VERSION SETA 521" --prede
+fine="STM32F10X_HD SETA 1" --list=.\listings\hr07test.lst hr07test.s
+
+
+
+ARM Macro Assembler    Page 1 Alphabetic symbol ordering
+Relocatable symbols
+
+Array 00000000
+
+Symbol: Array
+   Definitions
+      At line 2 in file hr07test.s
+   Uses
+      At line 7 in file hr07test.s
+Comment: Array used once
+BUF 00000000
+
+Symbol: BUF
+   Definitions
+      At line 1 in file hr07test.s
+   Uses
+      None
+Comment: BUF unused
+2 symbols
+
+
+
+ARM Macro Assembler    Page 1 Alphabetic symbol ordering
+Relocatable symbols
+
+LOOP 0000000C
+
+Symbol: LOOP
+   Definitions
+      At line 11 in file hr07test.s
+   Uses
+      At line 11 in file hr07test.s
+Comment: LOOP used once
+RESET 00000000
+
+Symbol: RESET
+   Definitions
+      At line 5 in file hr07test.s
+   Uses
+      None
+Comment: RESET unused
+2 symbols
+338 symbols in table

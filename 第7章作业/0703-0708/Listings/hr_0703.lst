@@ -1,0 +1,38 @@
+
+
+
+ARM Macro Assembler    Page 1 
+
+
+    1 00000000                 AREA             RESET, CODE, READONLY
+    2 00000000                 ENTRY
+    3 00000000 F04F 0214       MOV              R2, #20     ;初始化R2的值
+    4 00000004 F04F 031E       MOV              R3, #30     ;初始化R3的值
+    5 00000008 4293            CMP              R3, R2      ;判断R3>R2?
+    6 0000000A BF8C F102 
+              030A             ADDHI            R3, R2, #10 ;R3>R2时，R3=R2+10
+    7 00000010 F102 0364       ADDLS            R3, R2, #100 ;R3<=R2时，R3=R2+1
+                                                            00
+    8 00000014                 END
+Command Line: --debug --xref --diag_suppress=9931 --cpu=Cortex-M3 --apcs=interw
+ork --depend=.\objects\hr_0703.d -o.\objects\hr_0703.o -IF:\github_repository\M
+icrocomputer-Principle-and-System_experiment\第7章作业\RTE -I"D:\Program Files 
+(x86)\MDK5.20\Keil\STM32F1xx_DFP\2.1.0\Device\Include" -I"D:\Program Files (x86
+)\MDK5.20\ARM\CMSIS\Include" --predefine="__UVISION_VERSION SETA 521" --predefi
+ne="STM32F10X_HD SETA 1" --list=.\listings\hr_0703.lst hr_0703.s
+
+
+
+ARM Macro Assembler    Page 1 Alphabetic symbol ordering
+Relocatable symbols
+
+RESET 00000000
+
+Symbol: RESET
+   Definitions
+      At line 1 in file hr_0703.s
+   Uses
+      None
+Comment: RESET unused
+1 symbol
+333 symbols in table

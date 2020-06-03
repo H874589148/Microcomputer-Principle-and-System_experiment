@@ -1,0 +1,6 @@
+--cpu Cortex-M3 -g --apcs=interwork 
+-IF:\github_repository\Microcomputer-Principle-and-System_experiment\µÚ7ÕÂ×÷Òµ\RTE
+-I"D:\Program Files (x86)\MDK5.20\Keil\STM32F1xx_DFP\2.1.0\Device\Include"
+-I"D:\Program Files (x86)\MDK5.20\ARM\CMSIS\Include"
+--pd "__UVISION_VERSION SETA 521" --pd "STM32F10X_HD SETA 1"
+--list .\listings\hr0709.lst --xref -o .\objects\hr0709.o --depend .\objects\hr0709.d "hr0709.s"

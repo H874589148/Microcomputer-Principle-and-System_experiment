@@ -1,0 +1,617 @@
+
+
+
+ARM Macro Assembler    Page 1 
+
+
+    1 00000000         ; ÖÐ¹ú¿ÆÑ§¼¼Êõ´óÑ§£¬ÐÅÏ¢¿ÆÑ§¼¼ÊõÑ§Ôº£¬Î¢»úÔ­ÀíÓëÇ¶ÈëÊ½Ïµ
+                       Í³
+    2 00000000         ; ´¿»ã±àµÄ´úÂëÊ¾Àý£¬2020-05-11
+    3 00000000         
+    4 00000000         ; Stack Size (in Bytes) <0x0-0xFFFFFFFF:8>
+    5 00000000         ; ¶¨ÒåÕ»´óÐ¡
+    6 00000000 00000400 
+                       Stack_Size
+                               EQU              0x00000400
+    7 00000000         
+    8 00000000                 AREA             STACK, NOINIT, READWRITE, ALIGN
+=3
+    9 00000000         __stack_limit
+   10 00000000         Stack_Mem
+                               SPACE            Stack_Size
+   11 00000400         __initial_sp
+   12 00000400         
+   13 00000400                 EXPORT           __stack_limit
+   14 00000400                 EXPORT           __initial_sp
+   15 00000400                 THUMB
+   16 00000400         
+   17 00000400         ; Vector Table Mapped to Address 0 at Reset
+   18 00000400                 AREA             RESET, DATA, READONLY
+   19 00000000                 EXPORT           __Vectors
+   20 00000000                 EXPORT           __Vectors_End
+   21 00000000                 EXPORT           __Vectors_Size
+   22 00000000 00000000 
+                       __Vectors
+                               DCD              __initial_sp ; Top of Stack
+   23 00000004 00000000        DCD              Reset_Handler ; Reset Handler
+   24 00000008 00 00 00 
+              00 00 00 
+              00 00 00 
+              00 00 00 
+              00 00 00 
+              00 00 00 
+              00 00 00 
+              00 00 00 
+              00 00 00 
+              00 00 00 
+              00 00 00 
+              00 00 00 
+              00 00 00 
+              00 00 00 
+              00 00 00 
+              00 00 00 
+              00 00 00 
+              00 00 00 
+              00 00 00 
+              00 00 00 
+              00 00 00 
+              00 00 00 
+              00 00 00 
+              00 00 00 
+              00 00 00 
+              00 00 00 
+              00 00 00 
+              00 00 00 
+              00 00 00 
+
+
+
+ARM Macro Assembler    Page 2 
+
+
+              00 00 00 
+              00 00 00 
+              00 00 00 
+              00 00 00 
+              00 00 00 
+              00 00 00 
+              00 00 00 
+              00 00 00 
+              00 00 00 
+              00 00 00 
+              00 00 00 
+              00 00 00 
+              00 00 00 
+              00 00 00 
+              00 00 00 
+              00 00 00 
+              00 00 00 
+              00 00 00 
+              00 00 00 
+              00 00 00 
+              00 00 00 
+              00 00 00 
+              00 00 00 
+              00 00 00 
+              00 00 00 
+              00 00 00 
+              00 00 00 
+              00 00 00 
+              00 00 00 
+              00 00 00 
+              00 00 00 
+              00 00 00 
+              00 00 00 
+              00 00 00 
+              00 00 00 
+              00 00 00 
+              00 00 00 
+              00 00 00 
+              00 00 00 
+              00 00 00 
+              00 00 00 
+              00 00 00 
+              00 00 00 
+              00 00 00 
+              00 00 00 
+              00 00 00 
+              00 00 00 
+              00 00 00 
+              00 00 00 
+              00 00 00 
+              00 00 00 
+              00 00 00 
+              00 00 00 
+              00 00 00 
+              00 00 00 
+              00 00 00 
+              00 00 00 
+              00 00 00 
+              00 00 00 
+
+
+
+ARM Macro Assembler    Page 3 
+
+
+              00 00 00 
+              00 00 00 
+              00 00 00 
+              00 00 00 
+              00 00 00 
+              00 00 00 
+              00 00 00 
+              00 00 00 
+              00 00 00 
+              00 00 00 
+              00 00 00 
+              00 00 00 
+              00 00 00 
+              00 00 00 
+              00 00 00 
+              00 00 00 
+              00 00 00 
+              00 00 00 
+              00 00 00 
+              00 00 00 
+              00 00 00 
+              00 00 00 
+              00 00 00 
+              00 00 00 
+              00 00 00 
+              00 00 00 
+              00 00 00 
+              00 00 00 
+              00 00 00 
+              00 00 00 
+              00 00 00 
+              00 00 00 
+              00 00 00 
+              00 00 00 
+              00 00 00 
+              00 00 00 
+              00 00 00 
+              00 00 00 
+              00 00 00 
+              00 00 00 
+              00 00 00 
+              00 00 00 
+              00 00 00 
+              00 00 00 
+              00 00 00 
+              00 00 00 
+              00 00 00 
+              00 00 00 
+              00 00 00 
+              00 00 00 
+              00 00 00 
+              00 00 00 
+              00 00 00 
+              00 00 00 
+              00 00 00 
+              00 00 00 
+              00 00 00 
+              00 00 00 
+              00 00 00 
+
+
+
+ARM Macro Assembler    Page 4 
+
+
+              00 00 00 
+              00 00 00 
+              00 00 00 
+              00 00 00 
+              00 00 00 
+              00 00 00 
+              00 00 00 
+              00 00 00 
+              00 00 00 
+              00 00 00 
+              00 00 00 
+              00 00 00 
+              00 00 00 
+              00 00 00 
+              00 00 00 
+              00 00 00 
+              00 00 00 
+              00 00 00 
+              00 00 00 
+              00 00 00 
+              00 00 00 
+              00 00 00 
+              00 00 00 
+              00 00 00 
+              00 00 00 
+              00 00 00 
+              00 00 00 
+              00 00 00 
+              00 00 00 
+              00 00 00 
+              00 00 00 
+              00 00 00 
+              00 00 00 
+              00 00 00 
+              00 00 00 
+              00 00 00 
+              00 00 00 
+              00 00 00 
+              00 00 00 
+              00 00 00 
+              00 00 00 
+              00 00 00 
+              00 00 00 
+              00 00 00 
+              00 00 00 
+              00 00 00 
+              00 00 00 
+              00 00 00 
+              00 00 00 
+              00 00 00 
+              00 00 00 
+              00 00 00 
+              00 00 00 
+              00 00 00 
+              00 00 00 
+              00 00 00 
+              00 00 00 
+              00 00 00 
+              00 00 00 
+
+
+
+ARM Macro Assembler    Page 5 
+
+
+              00 00 00 
+              00 00 00 
+              00 00 00 
+              00 00 00 
+              00 00 00 
+              00 00 00 
+              00 00 00 
+              00 00 00 
+              00 00 00 
+              00 00 00 
+              00 00 00 
+              00 00 00 
+              00 00 00 
+              00 00 00 
+              00 00 00 
+              00 00 00 
+              00 00 00 
+              00 00 00 
+              00 00 00 
+              00 00 00 
+              00 00 00 
+              00 00 00 
+              00 00 00 
+              00 00 00 
+              00 00 00 
+              00 00 00 
+              00 00 00 
+              00 00 00 
+              00 00 00 
+              00 00 00 
+              00 00 00 
+              00 00 00 
+              00 00 00 
+              00 00 00 
+              00 00 00 
+              00 00 00 
+              00 00 00 
+              00 00 00 
+              00 00 00 
+              00 00 00 
+              00 00 00 
+              00 00 00 
+              00 00 00 
+              00 00 00 
+              00 00 00 
+              00 00 00 
+              00 00 00 
+              00 00 00 
+              00 00 00 
+              00 00 00 
+              00 00 00 
+              00 00 00 
+              00 00 00 
+              00 00 00 
+              00 00 00 
+              00 00 00 
+              00 00 00 
+              00 00 00 
+              00 00 00 
+
+
+
+ARM Macro Assembler    Page 6 
+
+
+              00 00 00 
+              00 00 00 
+              00 00 00 
+              00 00 00 
+              00 00 00 
+              00 00 00 
+              00 00 00 
+              00 00 00 
+              00 00 00 
+              00 00 00 
+              00 00 00 
+              00 00 00 
+              00 00 00 
+              00 00 00 
+              00 00 00 
+              00 00 00 
+              00 00 00 
+              00 00 00 
+              00 00 00 
+              00 00 00 
+              00 00 00 
+              00 00 00 
+              00 00 00 
+              00 00 00 
+              00 00 00 
+              00 00 00 
+              00 00 00 
+              00 00 00 
+              00 00 00 
+              00 00 00 
+              00 00 00 
+              00 00 00 
+              00 00 00 
+              00 00 00 
+              00 00 00 
+              00 00 00 
+              00 00 00 
+              00 00 00 
+              00 00 00 
+              00 00 00 
+              00 00 00 
+              00 00 00 
+              00 00 00 
+              00 00 00 
+              00 00 00 
+              00 00 00 
+              00 00 00 
+              00 00 00 
+              00 00 00 
+              00 00 00 
+              00 00 00 
+              00 00 00 
+              00 00 00 
+              00 00 00 
+              00 00 00 
+              00 00 00 
+              00 00 00 
+              00 00 00 
+              00 00 00 
+
+
+
+ARM Macro Assembler    Page 7 
+
+
+              00 00 00 
+              00 00 00 
+              00 00 00 
+              00 00 00 
+              00 00 00 
+              00 00 00 
+              00 00 00 
+              00 00 00 
+              00 00 00 
+              00 00 00 
+              00 00 00 
+              00 00 00 
+              00 00 00 
+              00 00 00 
+              00 00            SPACE            (254 * 4)   ; Îª·½±ãÑÝÊ¾£¬ÆäËûÒ
+                                                            ì³£ÏòÁ¿Ã»ÓÐÖ¸¶¨
+   25 00000400         __Vectors_End
+   26 00000400 00000400 
+                       __Vectors_Size
+                               EQU              __Vectors_End - __Vectors
+   27 00000400         
+   28 00000400         
+   29 00000400                 AREA             |.text|, CODE, READONLY
+   30 00000000         ; Reset Handler
+   31 00000000         Reset_Handler
+                               PROC
+   32 00000000                 EXPORT           Reset_Handler             [WEAK
+]
+   33 00000000         
+   34 00000000         ;³ÌÐò¿ªÊ¼
+   35 00000000         
+   36 00000000         ;AREA BUF, DATA, READWRITE;¶¨ÒåÊý¾Ý¶ÎBuf
+   37 00000000 11 22 33 
+              44       Array   DCB              0x11,0x22,0x33,0x44
+   38 00000004 55 66 77 
+              88               DCB              0x55,0x66,0x77,0x88
+   39 00000008 00 00 00 
+              00               DCB              0x00,0x00,0x00,0x00 ;¶¨Òå12¸ö×Ö
+                                                            ½ÚµÄÊý×éArray
+   40 0000000C         
+   41 0000000C         ;AREA RESET, CODE, READONLY
+   42 0000000C                 ENTRY
+   43 0000000C 4808            LDR              R0,=Array   ;È¡µÃÊý×éArrayµÄÊ×µ
+                                                            ØÖ·
+   44 0000000E F04F 0100       MOV              R1,#0       ;R1ÎªÑ­»·¼ÆÊýÆ÷
+   45 00000012 F04F 0200       MOV              R2,#0       ;R2ÎªÅ¼Êý¼ÆÊýÆ÷
+   46 00000016 290A    LOOP    CMP              R1,#10      ;ÅÐ¶ÏR1<10?
+   47 00000018 D208            BCS              FOR_E       ;ÈôÌõ¼þÊ§°Ü(R2>=10)
+                                                            ÔòÍË³öÑ­»·
+   48 0000001A 6803            LDR              R3,[R0]     ;´ÓÊý×é¶ÁÈ¡×Öµ½R3
+   49 0000001C F013 0301       ANDS             R3,R3,#0x01 ;È¡³ö×îµÍÎ»
+   50 00000020 2B01            CMP              R3,#1       ;ÅÐ¶ÏR3>1?
+   51 00000022 BF18 1C52       ADDNE            R2,R2,#1    ;Èç¹ûR3²»µÈÓÚ1ÔòR2+
+                                                            +
+   52 00000026 1C49            ADDS             R1,R1,#1    ;µÍ32Î»Ïà¼Ó£¬Ó°Ïì±ê
+                                                            Ö¾Î»£¬±£´æ½øÎ»£¬½á¹
+                                                            û·ÅÈëÑ­»·¼ÆÊýÆ÷R1
+   53 00000028 1C40            ADDS             R0,R0,#1    ;µÍ32Î»Ïà¼Ó£¬Ó°Ïì±ê
+                                                            Ö¾Î»£¬±£´æ½øÎ»£¬½á¹
+
+
+
+ARM Macro Assembler    Page 8 
+
+
+                                                            û·ÅÈëÊý×éµØÖ·R0
+   54 0000002A E7F4            B                LOOP
+   55 0000002C 4610    FOR_E   MOV              R0, R2      ;ÍË³öÑ­»·R0=R2
+   56 0000002E                 END
+              00 00 00000000 
+Command Line: --debug --xref --diag_suppress=9931 --cpu=Cortex-M3 --apcs=interw
+ork --depend=.\objects\hr0704.d -o.\objects\hr0704.o -IF:\github_repository\Mic
+rocomputer-Principle-and-System_experiment\µÚ7ÕÂ×÷Òµ\RTE -I"D:\Program Files (x
+86)\MDK5.20\Keil\STM32F1xx_DFP\2.1.0\Device\Include" -I"D:\Program Files (x86)\
+MDK5.20\ARM\CMSIS\Include" --predefine="__UVISION_VERSION SETA 521" --predefine
+="STM32F10X_HD SETA 1" --list=.\listings\hr0704.lst hr0704.s
+
+
+
+ARM Macro Assembler    Page 1 Alphabetic symbol ordering
+Relocatable symbols
+
+STACK 00000000
+
+Symbol: STACK
+   Definitions
+      At line 8 in file hr0704.s
+   Uses
+      None
+Comment: STACK unused
+Stack_Mem 00000000
+
+Symbol: Stack_Mem
+   Definitions
+      At line 10 in file hr0704.s
+   Uses
+      None
+Comment: Stack_Mem unused
+__initial_sp 00000400
+
+Symbol: __initial_sp
+   Definitions
+      At line 11 in file hr0704.s
+   Uses
+      At line 14 in file hr0704.s
+      At line 22 in file hr0704.s
+
+__stack_limit 00000000
+
+Symbol: __stack_limit
+   Definitions
+      At line 9 in file hr0704.s
+   Uses
+      At line 13 in file hr0704.s
+Comment: __stack_limit used once
+4 symbols
+
+
+
+ARM Macro Assembler    Page 1 Alphabetic symbol ordering
+Relocatable symbols
+
+RESET 00000000
+
+Symbol: RESET
+   Definitions
+      At line 18 in file hr0704.s
+   Uses
+      None
+Comment: RESET unused
+__Vectors 00000000
+
+Symbol: __Vectors
+   Definitions
+      At line 22 in file hr0704.s
+   Uses
+      At line 19 in file hr0704.s
+      At line 26 in file hr0704.s
+
+__Vectors_End 00000400
+
+Symbol: __Vectors_End
+   Definitions
+      At line 25 in file hr0704.s
+   Uses
+      At line 20 in file hr0704.s
+      At line 26 in file hr0704.s
+
+3 symbols
+
+
+
+ARM Macro Assembler    Page 1 Alphabetic symbol ordering
+Relocatable symbols
+
+.text 00000000
+
+Symbol: .text
+   Definitions
+      At line 29 in file hr0704.s
+   Uses
+      None
+Comment: .text unused
+Array 00000000
+
+Symbol: Array
+   Definitions
+      At line 37 in file hr0704.s
+   Uses
+      At line 43 in file hr0704.s
+Comment: Array used once
+FOR_E 0000002C
+
+Symbol: FOR_E
+   Definitions
+      At line 55 in file hr0704.s
+   Uses
+      At line 47 in file hr0704.s
+Comment: FOR_E used once
+LOOP 00000016
+
+Symbol: LOOP
+   Definitions
+      At line 46 in file hr0704.s
+   Uses
+      At line 54 in file hr0704.s
+Comment: LOOP used once
+Reset_Handler 00000000
+
+Symbol: Reset_Handler
+   Definitions
+      At line 31 in file hr0704.s
+   Uses
+      At line 23 in file hr0704.s
+      At line 32 in file hr0704.s
+
+5 symbols
+
+
+
+ARM Macro Assembler    Page 1 Alphabetic symbol ordering
+Absolute symbols
+
+Stack_Size 00000400
+
+Symbol: Stack_Size
+   Definitions
+      At line 6 in file hr0704.s
+   Uses
+      At line 10 in file hr0704.s
+Comment: Stack_Size used once
+__Vectors_Size 00000400
+
+Symbol: __Vectors_Size
+   Definitions
+      At line 26 in file hr0704.s
+   Uses
+      At line 21 in file hr0704.s
+Comment: __Vectors_Size used once
+2 symbols
+348 symbols in table

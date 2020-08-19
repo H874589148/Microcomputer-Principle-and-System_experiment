@@ -1,0 +1,20 @@
+Dependencies for Project 'sample_c', Target 'Target 1': (DO NOT MODIFY !)
+F (.\ustc_sample_c_asm.s)(0x5EBD73B8)(--cpu Cortex-M3 --li -g --apcs=interwork -I"F:\github_repository\Microcomputer-Principle-and-System_experiment\实验2 基于C的Project\RTE"-I"D:\Program Files (x86)\MDK5.20\ARM\CMSIS\4.5.0\CMSIS\Include"-I"D:\Program Files (x86)\MDK5.20\ARM\CMSIS\4.5.0\Device\ARM\ARMCM3\Include"--pd "__UVISION_VERSION SETA 521" --pd "_RTE_ SETA 1" --pd "ARMCM3 SETA 1"--list .\listings\ustc_sample_c_asm.lst --xref -o .\objects\ustc_sample_c_asm.o --depend .\objects\ustc_sample_c_asm.d)
+F (.\ustc_sample_c_c.c)(0x5EBD9878)(-c --cpu Cortex-M3 --li -g -O0 --apcs=interwork --split_sections-I"F:\github_repository\Microcomputer-Principle-and-System_experiment\实验2 基于C的Project\RTE"-I"D:\Program Files (x86)\MDK5.20\ARM\CMSIS\4.5.0\CMSIS\Include"-I"D:\Program Files (x86)\MDK5.20\ARM\CMSIS\4.5.0\Device\ARM\ARMCM3\Include"-D__UVISION_VERSION="521" -D_RTE_ -DARMCM3-o .\objects\ustc_sample_c_c.o --omf_browse .\objects\ustc_sample_c_c.crf --depend .\objects\ustc_sample_c_c.d)
+I (D:\Program Files (x86)\MDK5.20\ARM\ARMCC\include\stdio.h)(0x574E3E26)
+I (D:\Program Files (x86)\MDK5.20\ARM\CMSIS\4.5.0\Device\ARM\ARMCM3\Include\ARMCM3.h)(0x562075B4)
+I (D:\Program Files (x86)\MDK5.20\ARM\CMSIS\4.5.0\CMSIS\Include\core_cm3.h)(0x5625B70C)
+I (D:\Program Files (x86)\MDK5.20\ARM\ARMCC\include\stdint.h)(0x574E3E26)
+I (D:\Program Files (x86)\MDK5.20\ARM\CMSIS\4.5.0\CMSIS\Include\core_cmInstr.h)(0x5625A350)
+I (D:\Program Files (x86)\MDK5.20\ARM\CMSIS\4.5.0\CMSIS\Include\cmsis_armcc.h)(0x5625A350)
+I (D:\Program Files (x86)\MDK5.20\ARM\CMSIS\4.5.0\CMSIS\Include\core_cmFunc.h)(0x5625A350)
+I (D:\Program Files (x86)\MDK5.20\ARM\CMSIS\4.5.0\Device\ARM\ARMCM3\Include\system_ARMCM3.h)(0x55D41F08)
+F (RTE\Device\ARMCM3\startup_ARMCM3.s)(0x50B2CC4C)(--cpu Cortex-M3 --li -g --apcs=interwork -I"F:\github_repository\Microcomputer-Principle-and-System_experiment\实验2 基于C的Project\RTE"-I"D:\Program Files (x86)\MDK5.20\ARM\CMSIS\4.5.0\CMSIS\Include"-I"D:\Program Files (x86)\MDK5.20\ARM\CMSIS\4.5.0\Device\ARM\ARMCM3\Include"--pd "__UVISION_VERSION SETA 521" --pd "_RTE_ SETA 1" --pd "ARMCM3 SETA 1"--list .\listings\startup_armcm3.lst --xref -o .\objects\startup_armcm3.o --depend .\objects\startup_armcm3.d)
+F (RTE\Device\ARMCM3\system_ARMCM3.c)(0x55D41F08)(-c --cpu Cortex-M3 --li -g -O0 --apcs=interwork --split_sections-I"F:\github_repository\Microcomputer-Principle-and-System_experiment\实验2 基于C的Project\RTE"-I"D:\Program Files (x86)\MDK5.20\ARM\CMSIS\4.5.0\CMSIS\Include"-I"D:\Program Files (x86)\MDK5.20\ARM\CMSIS\4.5.0\Device\ARM\ARMCM3\Include"-D__UVISION_VERSION="521" -D_RTE_ -DARMCM3-o .\objects\system_armcm3.o --omf_browse .\objects\system_armcm3.crf --depend .\objects\system_armcm3.d)
+I (D:\Program Files (x86)\MDK5.20\ARM\CMSIS\4.5.0\Device\ARM\ARMCM3\Include\ARMCM3.h)(0x562075B4)
+I (D:\Program Files (x86)\MDK5.20\ARM\CMSIS\4.5.0\CMSIS\Include\core_cm3.h)(0x5625B70C)
+I (D:\Program Files (x86)\MDK5.20\ARM\ARMCC\include\stdint.h)(0x574E3E26)
+I (D:\Program Files (x86)\MDK5.20\ARM\CMSIS\4.5.0\CMSIS\Include\core_cmInstr.h)(0x5625A350)
+I (D:\Program Files (x86)\MDK5.20\ARM\CMSIS\4.5.0\CMSIS\Include\cmsis_armcc.h)(0x5625A350)
+I (D:\Program Files (x86)\MDK5.20\ARM\CMSIS\4.5.0\CMSIS\Include\core_cmFunc.h)(0x5625A350)
+I (D:\Program Files (x86)\MDK5.20\ARM\CMSIS\4.5.0\Device\ARM\ARMCM3\Include\system_ARMCM3.h)(0x55D41F08)

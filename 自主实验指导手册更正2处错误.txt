@@ -1,0 +1,10 @@
+自主实验指导手册中如下2处进行更正： 
+
+p18，“srcstr”--> dststr” 
+（30）	请结合“startup_ARMCM3.s”文件中如下代码分析示例中“dststr”的地址为何是“0x20001160”？ 
+
+
+p20，头文件路径错误 
+（35）	添加ST公司的库文件 
+...... “.\Libraries\CMSIS\CM3\DeviceSupport\ST\STM32F10x\stm32f10x_conf.h”文件； 
+--> .\Project\STM32F10x_StdPeriph_Template\STM32F10x\stm32f10x_conf.h” ......

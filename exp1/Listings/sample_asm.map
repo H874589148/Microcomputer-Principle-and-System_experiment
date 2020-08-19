@@ -1,0 +1,98 @@
+Component: ARM Compiler 5.06 update 3 (build 300) Tool: armlink [4d35c9]
+
+==============================================================================
+
+Section Cross References
+
+    ustc_sample_asm.o(RESET) refers to ustc_sample_asm.o(STACK) for __initial_sp
+    ustc_sample_asm.o(RESET) refers to ustc_sample_asm.o(.text) for Reset_Handler
+
+
+==============================================================================
+
+Image Symbol Table
+
+    Local Symbols
+
+    Symbol Name                              Value     Ov Type        Size  Object(Section)
+
+    ustc_sample_asm.s                        0x00000000   Number         0  ustc_sample_asm.o ABSOLUTE
+    RESET                                    0x08000000   Section     1024  ustc_sample_asm.o(RESET)
+    .text                                    0x08000400   Section       76  ustc_sample_asm.o(.text)
+    $v0                                      0x08000400   Number         0  ustc_sample_asm.o(.text)
+    STACK                                    0x20000000   Section     1024  ustc_sample_asm.o(STACK)
+
+    Global Symbols
+
+    Symbol Name                              Value     Ov Type        Size  Object(Section)
+
+    BuildAttributes$$THM_ISAv4$E$P$D$K$B$S$7EM$VFPi3$EXTD16$VFPS$VFMA$PE$A:L22UL41UL21$X:L11$S22US41US21$IEEE1$IW$USESV6$~STKCKD$USESV7$~SHL$OSPACE$EBA8$STANDARDLIB$EABIv2 0x00000000   Number         0  anon$$obj.o ABSOLUTE
+    __Vectors_Size                           0x00000400   Number         0  ustc_sample_asm.o ABSOLUTE
+    __Vectors                                0x08000000   Data           4  ustc_sample_asm.o(RESET)
+    Reset_Handler                            0x08000401   Thumb Code    72  ustc_sample_asm.o(.text)
+    __Vectors_End                            0x08000400   Data           0  ustc_sample_asm.o(RESET)
+    __stack_limit                            0x20000000   Data           0  ustc_sample_asm.o(STACK)
+    __initial_sp                             0x20000400   Data           0  ustc_sample_asm.o(STACK)
+
+
+
+==============================================================================
+
+Memory Map of the image
+
+  Image entry point : Not specified.
+
+  Load Region LR_IROM1 (Base: 0x08000000, Size: 0x0000044c, Max: 0x00080000, ABSOLUTE)
+
+    Execution Region ER_IROM1 (Base: 0x08000000, Size: 0x0000044c, Max: 0x00080000, ABSOLUTE)
+
+    Base Addr    Size         Type   Attr      Idx    E Section Name        Object
+
+    0x08000000   0x00000400   Data   RO            2    RESET               ustc_sample_asm.o
+    0x08000400   0x0000004c   Code   RO            3    .text               ustc_sample_asm.o
+
+
+    Execution Region RW_IRAM1 (Base: 0x20000000, Size: 0x00000400, Max: 0x00020000, ABSOLUTE)
+
+    Base Addr    Size         Type   Attr      Idx    E Section Name        Object
+
+    0x20000000   0x00000400   Zero   RW            1    STACK               ustc_sample_asm.o
+
+
+==============================================================================
+
+Image component sizes
+
+
+      Code (inc. data)   RO Data    RW Data    ZI Data      Debug   Object Name
+
+        76          4       1024          0       1024        472   ustc_sample_asm.o
+
+    ----------------------------------------------------------------------
+        76          4       1024          0       1024        472   Object Totals
+         0          0          0          0          0          0   (incl. Generated)
+         0          0          0          0          0          0   (incl. Padding)
+
+    ----------------------------------------------------------------------
+         0          0          0          0          0          0   Library Totals
+         0          0          0          0          0          0   (incl. Padding)
+
+    ----------------------------------------------------------------------
+
+==============================================================================
+
+
+      Code (inc. data)   RO Data    RW Data    ZI Data      Debug   
+
+        76          4       1024          0       1024        472   Grand Totals
+        76          4       1024          0       1024        472   ELF Image Totals
+        76          4       1024          0          0          0   ROM Totals
+
+==============================================================================
+
+    Total RO  Size (Code + RO Data)                 1100 (   1.07kB)
+    Total RW  Size (RW Data + ZI Data)              1024 (   1.00kB)
+    Total ROM Size (Code + RO Data + RW Data)       1100 (   1.07kB)
+
+==============================================================================
+

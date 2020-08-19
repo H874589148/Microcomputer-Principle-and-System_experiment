@@ -1,0 +1,6 @@
+-c --cpu Cortex-M3 --li -g -O0 --apcs=interwork --split_sections
+-IF:\github_repository\Microcomputer-Principle-and-System_experiment\exp2\RTE
+-I"D:\Program Files (x86)\MDK5.20\ARM\CMSIS\4.5.0\CMSIS\Include"
+-I"D:\Program Files (x86)\MDK5.20\ARM\CMSIS\4.5.0\Device\ARM\ARMCM3\Include"
+-D__UVISION_VERSION="521" -D_RTE_ -DARMCM3
+-o .\objects\ustc_sample_c_c.o --omf_browse .\objects\ustc_sample_c_c.crf --depend .\objects\ustc_sample_c_c.d "ustc_sample_c_c.c"

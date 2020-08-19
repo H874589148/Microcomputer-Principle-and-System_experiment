@@ -1,0 +1,384 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%  Template for homework of DSP@ustc.
+%
+%  Fill in your name, student id, homework Number
+%  
+%   Please compile with XelaTex
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\documentclass[11pt,letter,notitlepage,UTF8]{ctexart}
+%Mise en page
+\usepackage{listings}
+\usepackage{xcolor}
+\lstset{
+	numbers=left, 
+	numberstyle= \tiny, 
+	keywordstyle= \color{ blue!70},
+	commentstyle= \color{red!50!green!50!blue!50}, 
+	frame=shadowbox, % 阴影效果
+	rulesepcolor= \color{ red!20!green!20!blue!20} ,
+	escapeinside=``, % 英文分号中可写入中文
+	xleftmargin=2em,xrightmargin=2em, aboveskip=1em,
+	framexleftmargin=2em
+}
+
+\usepackage[left=2.5cm, right=2.5cm, lines=45, top=1.5in, bottom=0.7in]{geometry}
+\usepackage{fancyhdr}
+\usepackage{fancybox}
+\usepackage{graphicx}
+\usepackage{pdfpages} 
+\usepackage{enumitem}
+\usepackage{algorithm}
+\usepackage{algorithmic}
+\newcommand\Loadedframemethod{TikZ}
+\usepackage[framemethod=\Loadedframemethod]{mdframed}
+
+\usepackage{amssymb,amsmath}
+\usepackage{amsthm}
+\usepackage{thmtools}
+\newtheorem{lemma}{Lemma}
+
+\usepackage{subfigure}
+\usepackage{threeparttable}
+
+\pagestyle{fancy}
+%%%%%%%%%%%%%%%%%%%%%%%%
+%% Define the Exercise environment %%
+%%%%%%%%%%%%%%%%%%%%%%%%
+\mdtheorem[
+topline=false,
+rightline=false,
+leftline=false,
+bottomline=false,
+leftmargin=-10,
+rightmargin=-10
+]{exercise}{\textbf{习题}}
+%%%%%%%%%%%%%%%%%%%%%%%
+%% End of the Exercise environment %%
+%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%%%%%%%%%%%%%%%%%%%%%%%
+%% Define the Solution Environment %%
+%%%%%%%%%%%%%%%%%%%%%%%
+\declaretheoremstyle
+[
+spaceabove=0pt, 
+spacebelow=0pt, 
+headfont=\normalfont\bfseries,
+notefont=\mdseries, 
+notebraces={(}{)}, 
+headpunct={:\quad}, 
+headindent={},
+postheadspace={ }, 
+postheadspace=4pt, 
+bodyfont=\normalfont, 
+qed=,
+]{mystyle}
+
+\declaretheorem[style=mystyle,title=解,numbered=no]{solution}
+%%%%%%%%%%%%%%%%%%%%%%%
+%% End of the Solution environment %%
+%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%%%%%%%%%%%%%%%%%%%%
+%% Put your information here %%
+%%%%%%%%%%%%%%%%%%%
+\newcommand{\name}{\text{胡睿}}  	          			%%% FILL IN YOUR NAME HERE
+\newcommand{\id}{\text{PB17061124}}		        		%%% FILL IN YOUR ID HERE
+\newcommand{\hwno}{七}                               %%%FILL IN homework number
+%%%%%%%%%%%%%%%%%%%%
+%% End of the student's info %%
+%%%%%%%%%%%%%%%%%%%
+
+
+\lhead{
+	\textbf{\name}
+}
+\rhead{
+	\textbf{\id}
+}
+\chead{\textbf{
+		  作业 \hwno 
+}}
+
+
+\begin{document}
+\vspace*{-4\baselineskip}
+\thispagestyle{empty}
+
+\begin{center}
+{\bf\large 微机原理与嵌入式系统}\\
+{2020春}\\
+中国科学技术大学
+\end{center}
+
+\noindent
+作业 \hwno  
+\hfill
+日期：{\today}
+\\
+姓名： \name             			
+\hfill
+学号： \id						
+\hfill
+
+\noindent
+\rule{\textwidth}{2pt}
+
+\medskip
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% BODY OF HOMEWORK GOES HERE
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%\textbf{Notice, }to get the full credits, please show your solutions step by step.
+
+\begin{exercise}[7.3]
+	编写一个完整ARM汇编程序实现如下功能：当R3>R2时，将R2+10存入R3，否则将R2+100存入R3。
+\end{exercise}
+\begin{solution}
+汇编源代码：
+\begin{lstlisting}
+	;AREA RESET, CODE, READONLY
+	ENTRY
+	MOV R2, #76;初始化R2的值
+	MOV R3, #88;初始化R3的值
+	CMP R3, R2;判断R3>R2?
+	ADDHI R3, R2, #10;R3>R2时，R3=R2+10
+	ADDLS R3, R2, #100;R3<=R2时，R3=R2+100
+	;END
+\end{lstlisting}
+\end{solution}
+
+\begin{exercise}[7.4]
+	将数据段中10个数据中的偶数个数统计后放入R0寄存器。	
+\end{exercise}
+\begin{solution}
+汇编源代码：
+\begin{lstlisting}
+	;AREA BUF, DATA, READWRITE;定义数据段Buf
+Array DCB 0x11,0x22,0x33,0x44
+	DCB 0x55,0x66,0x77,0x88
+	DCB 0x00,0x00,0x00,0x00;定义12个字节的数组Array
+
+	;AREA RESET, CODE, READONLY
+	ENTRY
+	LDR R0,=Array;取得数组Array的首地址
+	MOV R1,#0;R1为循环计数器
+	MOV R2,#0;R2为偶数计数器
+LOOP CMP R1,#10;判断R1<10?
+	BCS FOR_E;若条件失败(R1>=10)则退出循环
+	LDR R3,[R0];从数组读取字到R3
+	ANDS R3,R3,#0x01;取出最低位
+	CMP R3,#1;判断R3>1?
+	ADDNE R2,R2,#1;如果R3不等于1则R2++
+	ADDS R1,R1,#1;低32位相加，影响标志位，保存进位，结果放入循环计数器R1
+	ADDS R0,R0,#1;低32位相加，影响标志位，保存进位，结果放入数组地址R0
+	B LOOP
+FOR_E MOV R0, R2;退出循环R0=R2
+	END
+	
+\end{lstlisting}
+\end{solution}
+
+\begin{exercise}[7.5]
+	将数据段中10个有符号数中的正数个数统计后放入R0寄存器。	
+\end{exercise}
+\begin{solution}
+汇编源代码：
+\begin{lstlisting}
+	;AREA BUF, DATA, READWRITE;定义数据段Buf
+Array DCB 0x11,0x22,0x33,0x44
+	DCB 0x55,0x66,0x77,0x88
+	DCB 0x00,0x00,0x00,0x00;定义12个字节的数组Array
+
+	;AREA RESET, CODE, READONLY
+	ENTRY
+	LDR R0,=Array;取得数组Array的首地址
+	MOV R1,#0;R1为循环计数器
+	MOV R2,#0;R2为偶数计数器
+LOOP CMP R1,#10;判断R1<10?
+	BCS FOR_E;若条件失败(R2>=10)则退出循环
+	LDR R3,[R0];从数组读取字到R3
+	ANDS R3,R3,#0x80;取出符号位
+	CMP R3,#1;判断R3>1?
+	ADDNE R2,R2,#1;如果R3不等于1则R2++
+	ADDS R1,R1,#1;低32位相加，影响标志位，保存进位，结果放入循环计数器R1
+	ADDS R0,R0,#1;低32位相加，影响标志位，保存进位，结果放入数组地址R0
+	B LOOP
+FOR_E MOV R0, R2;退出循环R0=R2
+	END
+
+\end{lstlisting}
+\end{solution}
+
+\begin{exercise}[7.6]
+	试编写一个循环程序，实现1至100的累加。	
+\end{exercise}
+\begin{solution}
+汇编源代码：
+\begin{lstlisting}
+	;AREA RESET, CODE, READONLY
+	EXPORT RESULT [WEAK];声明一个可以全局引用的标号RESULT
+RESULT;输出结果
+	ENTRY
+	MOV R0, #100;循环数，即累加个数100
+	MOV R1, #0;初始化数据
+LOOP ADD R1, R1, R0;将数据进行相加，获得最后的数据
+	SUBS R0, R0, #1;R0=R0-1
+	CMP R0, #0;将R0与0比较判断循环是否结束
+	BNE LOOP;判断循环是否结束，结束则进行下面的步骤
+	LDR R2, =RESULT;RESULT为数据段存储结果单元，将RESULT地址赋给R2
+	STR R1, [R2]
+	;END
+
+\end{lstlisting}
+\end{solution}
+
+\begin{exercise}[7.7]
+	汇编程序如何定义子程序？如何调用子程序？	
+\end{exercise}
+\begin{solution}
+汇编源代码：
+\begin{lstlisting}
+X EQU 19;定义X的值为19
+N EQU 20;定义N的值为20
+	;AREA RESET, CODE, READONLY;声明代码段
+	ENTRY;标识程序入口
+START LDR R0, =X ;给R0、R1赋初值
+	LDR R1 , =N;将N读取到R1
+	BL MAX;调用子程序MAX
+HALT B HALT;
+MAX;声明子程序MAX
+	CMP R0, R1;判断R0>R1?
+	MOVHI R2, R0;R0>R1时R2=R0,R2等于R0,R1中的最大值
+	MOVLS R2, R1;R0<=R1时R2=R1,R2等于R0,R1中的最大值
+	MOV PC, LR;返回语句
+	;END
+
+\end{lstlisting}
+\end{solution}
+
+\begin{exercise}[7.8]
+	编写完整程序并利用汇编子程序计算N!（N<=10）。	
+\end{exercise}
+\begin{solution}
+汇编源代码：
+\begin{lstlisting}
+N EQU 10;定义N的值为10
+	;AREA RESET, CODE, READONLY;声明代码段
+	ENTRY;标识程序入口
+START LDR R0, =N;给R0、R1赋初值R0=10,R1=1
+	MOV R1, #1;初始化R1
+	BL FUNC;调用子程序MAX
+	MOV R2, R1;R2=R1
+HALT B HALT;
+FUNC;声明子程程序FUNC
+LOOP MUL R2, R2, R1;R2=R2*R1
+	ADD R1, R1, #1;R1++
+	CMP R1, R0;将R1与R0比较看循环是否结束
+	BNE LOOP;判断循环是否结束，结束则进行下面的步骤
+	MOV PC, LR;返回语句
+	;END
+
+\end{lstlisting}
+\end{solution}
+
+\begin{exercise}[7.9]
+	编写完整汇编程序调用C函数计算N!（N<=10）。	
+\end{exercise}
+\begin{solution}
+汇编源代码：
+\begin{lstlisting}
+;N EQU 10;定义N的值为10
+;AREA RESET, CODE, READONLY;声明代码段
+ENTRY;标识程序入口
+IMPORT FACT;
+MOV R0, #10;初始化R0
+BL FACT
+LDR R1,=0x20000000;结果R0存入内存单元R1
+STR R0,[R1]
+
+;END
+
+\end{lstlisting}
+C语言源代码：
+\begin{lstlisting}
+//hr0709.c
+//需要调用的C函数原型计算N!
+int FACT(int n)
+{
+	int i=1;
+	int result=1;
+	if(n==0)
+		result=1;
+	else if(n<0)
+		result=0;
+	else{
+		for(i=1;i<=n;i++){
+			result=result*i;
+		}
+	}
+	return(result);
+}
+
+\end{lstlisting}
+\end{solution}
+
+\begin{exercise}[7.10]
+	C程序调用汇编函数计算字符串长度，并返回长度值。	
+\end{exercise}
+\begin{solution}
+C语言源代码：
+\begin{lstlisting}
+//hr0710.c
+extern void my_strlen(char * d) ; //需要调用的汇编函数原型并加extern关键字
+int main ()
+{
+	char * srcstr = "0123456" ;
+	my_strlen(srcstr);
+	return 0 ;
+}
+	
+\end{lstlisting}
+汇编源代码：
+\begin{lstlisting}
+	;N EQU 10;定义N的值为10
+	;AREA RESET, CODE, READONLY;声明代码段
+	ENTRY;标识程序入口
+	EXPORT my_strlen;
+my_strlen
+	MOV R1, #0;初始化R3
+LOOP LDRB R2, [R0], #1;R0指向源字符串地址，取出字符内容存入R2
+	ADD R1, R1, #1;R1=R1+1
+	CMP R2, #0;判断R2是否为0
+	BNE LOOP;判断循环是否结束，结束则进行下面的步骤
+	BLX LR;返回指令
+	;END
+
+\end{lstlisting}
+\end{solution}
+
+\begin{exercise}[7.11]
+	阅读程序段，说明完成的功能。\\
+	LOOP\\
+	LDMIA R12!,(R0-R11)\\
+	STMIA R13!, (R0-R11)\\
+	CMP R12, R13\\
+	BLO LOOP\\
+\end{exercise}
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\end{document}

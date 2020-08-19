@@ -1,0 +1,2 @@
+Dependencies for Project 'sample_asm', Target 'Target 1': (DO NOT MODIFY !)
+F (.\ustc_sample_asm.s)(0x5EC495AC)(--cpu Cortex-M4.fp -g --apcs=interwork -I"F:\github_repository\Microcomputer-Principle-and-System_experiment\实验1 基于ASM的Project\RTE"-I"D:\Program Files (x86)\MDK5.20\Keil\STM32F4xx_DFP\2.14.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include"-I"D:\Program Files (x86)\MDK5.20\ARM\CMSIS\Include"--pd "__UVISION_VERSION SETA 521" --pd "STM32F407xx SETA 1"--list .\listings\ustc_sample_asm.lst --xref -o .\objects\ustc_sample_asm.o --depend .\objects\ustc_sample_asm.d)

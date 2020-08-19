@@ -1,0 +1,6 @@
+--cpu Cortex-M3 --li -g --apcs=interwork 
+-IF:\github_repository\Microcomputer-Principle-and-System_experiment\exp2\RTE
+-I"D:\Program Files (x86)\MDK5.20\ARM\CMSIS\4.5.0\CMSIS\Include"
+-I"D:\Program Files (x86)\MDK5.20\ARM\CMSIS\4.5.0\Device\ARM\ARMCM3\Include"
+--pd "__UVISION_VERSION SETA 521" --pd "_RTE_ SETA 1" --pd "ARMCM3 SETA 1"
+--list .\listings\ustc_sample_c_asm.lst --xref -o .\objects\ustc_sample_c_asm.o --depend .\objects\ustc_sample_c_asm.d "ustc_sample_c_asm.s"

@@ -1,0 +1,164 @@
+
+
+
+ARM Macro Assembler    Page 1 
+
+
+    1 00000000         ; ÖÐ¹ú¿ÆÑ§¼¼Êõ´óÑ§£¬ÐÅÏ¢¿ÆÑ§¼¼ÊõÑ§Ôº£¬Î¢»úÔ­ÀíÓëÇ¶ÈëÊ½Ïµ
+                       Í³
+    2 00000000         ; ´¿»ã±à´úÂë±àÐ´×Óº¯ÊýÊ¾Àý£¬2020-05-14
+    3 00000000         
+    4 00000000         ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+    5 00000000         ;   »ã±à´úÂë¶¨ÒåµÄ×Óº¯Êý
+    6 00000000         ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+    7 00000000                 AREA             MyCode,CODE,READONLY
+    8 00000000                 EXPORT           strcopy
+    9 00000000         strcopy PROC                         ;±ØÐëÓëEXPORTºóÃæ±ê
+                                                            ºÅÒ»ÖÂ
+   10 00000000         
+   11 00000000 F811 2B01 
+                       LOOP    LDRB             R2, [R1],#1 ;R1Ö¸ÏòÔ´×Ö·û´®µØÖ·
+                                                            £¬È¡³ö×Ö·ûÄÚÈÝ´æÈëR
+                                                            2
+   12 00000004         ;¸üÐÂR1=R1+1£¬µÚÒ»´Îµ÷ÓÃÊ±R1Ö¸ÏòÔ´×Ö·û´®Ê×µØÖ·
+   13 00000004 F800 2B01       STRB             R2, [R0],#1 ;R0Ö¸ÏòÄ¿µÄ×Ö·û´®µØ
+                                                            Ö·£¬R2ÖÐÄÚÈÝ´æÈëR0Ö
+                                                            ¸ÏòÄÚ´æµ¥Ôª£¬
+   14 00000008         ;¸üÐÂR0=R0+1£¬µÚÒ»´Îµ÷ÓÃÊ±R0Ö¸ÏòÄ¿µÄ×Ö·û´®Ê×µØÖ·
+   15 00000008 2A00            CMP              R2, #0
+   16 0000000A D1F9            BNE              LOOP        ;ÏÈÖ´ÐÐºóÅÐ¶Ï£¬Ô´×Ö
+                                                            ·û´®µÄÖÕÖ¹·û¡®\0¡¯Ò
+                                                            ²¸´ÖÆµ½Ä¿µÄ×Ö·û´®
+   17 0000000C         
+   18 0000000C 46F7            MOV              PC, LR
+   19 0000000E                 ENDP
+   20 0000000E         
+   21 0000000E         ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+   22 0000000E         ;   »ã±àÖÐµ÷ÓÃCº¯Êý
+   23 0000000E         ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+   24 0000000E                 PRESERVE8                    ;¸ù¾ÝATPCS,¶ÑÕ»Êý¾Ý
+                                                            ÐèÒªÉèÖÃÎª8×Ö½Ú¶ÔÆë
+                                                            
+   25 0000000E                 THUMB
+   26 0000000E                 EXPORT           call_C
+   27 0000000E                 IMPORT           MY_C_FUNCTION ;ÉùÃ÷MY_C_FUNCTIO
+                                                            NÎªÍâ²¿ÒýÓÃ·ûºÅ
+   28 0000000E 00 00           ALIGN
+   29 00000010         call_C  PROC                         ;±ØÐëÓëEXPORTºóÃæ±ê
+                                                            ºÅÒ»ÖÂ
+   30 00000010 F04F 0001       MOV              R0, #1      ;²ÎÊý1¸³R0
+   31 00000014 F04F 0102       MOV              R1, #2      ;²ÎÊý2¸³R1
+   32 00000018 F7FF FFFE       BL               MY_C_FUNCTION
+   33 0000001C                 ENDP
+   34 0000001C         
+   35 0000001C         ;;;;;;;;;ÒÔÏÂÀûÓÃÈ«¾Ö±äÁ¿½øÐÐÊý¾Ý´«µÝµÄ´úÂë£¬µ÷ÊÔ½á¹û²»Õ
+                       ýÈ·£¡£¡£¡;;;;;;;;;;;;;;;;;
+   36 0000001C                 EXPORT           swap_param
+   37 0000001C                 IMPORT           ui_global_defined_in_c ;ÓÃIMPOR
+                                                            TÎ±²Ù×÷ÉùÃ÷¸Ã±äÁ¿Ê±
+                                                            ÔÚÆäËûÎÄ¼þÖÐ¶¨ÒåµÄ±
+                                                            äÁ¿
+   38 0000001C                 GBLA             ui_glocal_defined_in_asm
+   39 0000001C         
+   40 0000001C         swap_param
+                               PROC                         ;±ØÐëÓëEXPORTºóÃæ±ê
+                                                            ºÅÒ»ÖÂ
+
+
+
+ARM Macro Assembler    Page 2 
+
+
+   41 0000001C F240 0500 
+              F2C0 0500        MOV32            R5,ui_global_defined_in_c
+   42 00000024         ;  MOV  R6, ui_glocal_defined_in_asm
+   43 00000024 000000AA 
+                       ui_glocal_defined_in_asm
+                               SETA             0xAA
+   44 00000024                 ENDP
+   45 00000024         
+   46 00000024         ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+   47 00000024 BF00            NOP                          ;¿ÕÖ¸Áî£¬ÔÚKeilÀïÐ´
+                                                            »ã±à´úÂëÈç¹û´úÂëÎ´¶
+                                                            ÔÆëµ½×Ö£¬±àÒëÆ÷×Ô¶¯
+                                                            ²¹²¹¾¯¸æ£¬¼ÓNOP¶ÔÆë
+                                                            
+   48 00000026                 END
+Command Line: --debug --xref --diag_suppress=9931 --cpu=Cortex-M3 --apcs=interw
+ork --depend=.\objects\ustc_sample_c_asm.d -o.\objects\ustc_sample_c_asm.o -IF:
+\github_repository\Microcomputer-Principle-and-System_experiment\exp2\RTE -I"D:
+\Program Files (x86)\MDK5.20\ARM\CMSIS\4.5.0\CMSIS\Include" -I"D:\Program Files
+ (x86)\MDK5.20\ARM\CMSIS\4.5.0\Device\ARM\ARMCM3\Include" --predefine="__UVISIO
+N_VERSION SETA 521" --predefine="_RTE_ SETA 1" --predefine="ARMCM3 SETA 1" --li
+st=.\listings\ustc_sample_c_asm.lst ustc_sample_c_asm.s
+
+
+
+ARM Macro Assembler    Page 1 Alphabetic symbol ordering
+Relocatable symbols
+
+LOOP 00000000
+
+Symbol: LOOP
+   Definitions
+      At line 11 in file ustc_sample_c_asm.s
+   Uses
+      At line 16 in file ustc_sample_c_asm.s
+Comment: LOOP used once
+MyCode 00000000
+
+Symbol: MyCode
+   Definitions
+      At line 7 in file ustc_sample_c_asm.s
+   Uses
+      None
+Comment: MyCode unused
+call_C 00000010
+
+Symbol: call_C
+   Definitions
+      At line 29 in file ustc_sample_c_asm.s
+   Uses
+      At line 26 in file ustc_sample_c_asm.s
+Comment: call_C used once
+strcopy 00000000
+
+Symbol: strcopy
+   Definitions
+      At line 9 in file ustc_sample_c_asm.s
+   Uses
+      At line 8 in file ustc_sample_c_asm.s
+Comment: strcopy used once
+swap_param 0000001C
+
+Symbol: swap_param
+   Definitions
+      At line 40 in file ustc_sample_c_asm.s
+   Uses
+      At line 36 in file ustc_sample_c_asm.s
+Comment: swap_param used once
+5 symbols
+
+
+
+ARM Macro Assembler    Page 1 Alphabetic symbol ordering
+External symbols
+
+MY_C_FUNCTION 00000000
+
+Symbol: MY_C_FUNCTION
+   Definitions
+      At line 27 in file ustc_sample_c_asm.s
+   Uses
+      At line 32 in file ustc_sample_c_asm.s
+Comment: MY_C_FUNCTION used once
+ui_global_defined_in_c 00000000
+
+Symbol: ui_global_defined_in_c
+   Definitions
+      At line 37 in file ustc_sample_c_asm.s
+   Uses
+      At line 41 in file ustc_sample_c_asm.s
+Comment: ui_global_defined_in_c used once
+2 symbols
+341 symbols in table
